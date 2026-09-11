@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            width: 400px;
+            padding: 30px;
+            background-color: white;
+            border: 2px solid #333;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        #display {
+            width: 90%;
+            height: 55px;
+            font-size: 25px;
+            margin-bottom: 30px;
+            padding: 5px 15px;
+            text-align: right;
+            border: 2px solid #555;
+            border-radius: 10px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        button {
+            height: 65px;
+            font-size: 28px;
+            background-color: #eeeeee;
+            border: 2px solid #555;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cccccc;
+        }
+
+        .operator {
+            background-color: #d9eaff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <h1>Calculator</h1>
+
+        <input type="text" id="display" readonly>
+
+        <div class="buttons">
+
+            <!-- First Row -->
+            <button class="operator" onclick="addOperator('+')">+</button>
+            <button class="operator" onclick="addOperator('-')">−</button>
+            <button class="operator" onclick="addOperator('*')">×</button>
+
+            <!-- Second Row -->
+            <button class="operator" onclick="addOperator('/')">÷</button>
+            <button class="operator" onclick="addOperator('%')">%</button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        let firstNumber = "";
+        let secondNumber = "";
+        let operator = "";
+
+        function addOperator(op) {
+
+            let value = prompt("Enter first number:");
+
+            if (value === null || value === "") {
+                return;
+            }
+
+            firstNumber = Number(value);
+
+            value = prompt("Enter second number:");
+
+            if (value === null || value === "") {
+                return;
+            }
+
+            secondNumber = Number(value);
+
+            operator = op;
+
+            calculate();
+        }
+
+
+        function calculate() {
+
+            let result;
+
+            if (operator === "+") {
+                result = firstNumber + secondNumber;
+            }
+
+            else if (operator === "-") {
+                result = firstNumber - secondNumber;
+            }
+
+            else if (operator === "*") {
+                result = firstNumber * secondNumber;
+            }
+
+            else if (operator === "/") {
+
+                if (secondNumber === 0) {
+                    result = "Cannot divide by zero";
+                } else {
+                    result = firstNumber / secondNumber;
+                }
+
+            }
+
+            else if (operator === "%") {
+                result = firstNumber % secondNumber;
+            }
+
+            document.getElementById("display").value =
+                firstNumber + " " + operator + " " + secondNumber + " = " + result;
+        }
+
+    </script>
+
+</body>
+</html>
